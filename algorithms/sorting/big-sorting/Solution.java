@@ -14,39 +14,28 @@ public class Solution {
             unsorted[unsorted_i] = in.next();
         }
         
-        for(int i=0; i<n; i++) {
-            int j = i+1;
-            
-            while(j < n) {
-                
-                boolean doSwap = false;
-                
-                if(unsorted[i].length() > unsorted[j].length()) {
-                    doSwap = true;
-                } else if(unsorted[i].length() < unsorted[j].length()) { } else {
-                    for(int k = 0; k < unsorted[i].length(); k++)
+        Arrays.sort(unsorted, new Comparator<String>() {
+            @Override
+            public int compare(String a, String b) 
+            {
+                if(a.length() > b.length()) {
+                    return 1;
+                } else if(a.length() < b.length()) { 
+                    return -1;
+                } else {
+                    for(int k = 0; k < a.length(); k++)
                     {
-                        if((int)unsorted[i].charAt(k) > (int)unsorted[j].charAt(k)) {
-                            doSwap = true;
-                        } else if((int)unsorted[i].charAt(k) < (int)unsorted[j].charAt(k)) {
-                            break;
-                        } else {
-                            continue;
-                        }
+                        if((int)a.charAt(k) > (int)b.charAt(k)) {
+                            return 1;
+                        } else if((int)a.charAt(k) < (int)b.charAt(k)) {
+                            return -1;
+                        } else { }
                     }
                 }
                 
-                if(doSwap) {
-                    String temp = unsorted[i];
-                    unsorted[i] = unsorted[j];
-                    unsorted[j] = temp;
-                }
-                
-                j++;
+                return 0;
             }
-            
-            
-        }
+        });
         
         for(int unsorted_i=0; unsorted_i < n; unsorted_i++){
             System.out.println(unsorted[unsorted_i]);
